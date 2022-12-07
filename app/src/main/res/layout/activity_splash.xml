@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Splash"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Welcome"
+        android:textColor="@color/white"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:id="@+id/welcomesplash"/>
+
+    <ImageView
+        android:layout_width="900px"
+        android:layout_height="400px"
+        android:background="@drawable/logogreta"
+        android:layout_margin="50dp"/>
+
+    <ProgressBar
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/welcomesplash"
+        android:layout_margin="16dp"
+        android:indeterminateTint="@color/white"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+
+</LinearLayout>
