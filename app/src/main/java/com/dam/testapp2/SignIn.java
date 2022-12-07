@@ -46,6 +46,14 @@ public class SignIn extends AppCompatActivity {
 
         FirebaseAuth.getInstance();
 
+        tVforgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utility.showToast(SignIn.this,"Reset your password");
+                startActivity(new Intent(SignIn.this, Forgotpass.class));
+            }
+        });
+
         tVsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
