@@ -8,6 +8,14 @@
     android:background="@drawable/background">
 
     <ImageView
+        android:id="@+id/logoutprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_3pointvert" />
+
+
+    <ImageView
         android:id="@+id/bp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
@@ -24,6 +32,7 @@
         app:cardCornerRadius="100dp">
 
         <ImageView
+            android:id="@+id/ppincv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -51,7 +60,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/metier"
+        android:id="@+id/metier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username"
@@ -64,7 +73,7 @@
         android:textColor="@color/white" />
 
     <TextView
-        android:id="@+id/metier2"
+        android:id="@+id/metier1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username"
@@ -76,6 +85,23 @@
         android:layout_marginEnd="120dp"
         android:textColor="@color/white" />
 
+    <ImageView
+        android:id="@+id/editppp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/pp"
+        android:layout_alignBottom="@+id/pp"
+        android:elevation="18dp"
+        android:src="@drawable/ic_baseline_add_24" />
+
+    <ImageView
+        android:id="@+id/editbp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/bp"
+        android:layout_alignBottom="@+id/bp"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_add_24" />
 
 
 </RelativeLayout>

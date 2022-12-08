@@ -1,3 +1,8 @@
+
+
+
+
+
 package com.dam.testapp2;
 
 import androidx.annotation.NonNull;
@@ -5,10 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -53,6 +61,20 @@ public class SignIn extends AppCompatActivity {
                 startActivity(new Intent(SignIn.this, Forgotpass.class));
             }
         });
+
+
+        cBshowpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    eTloginpassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else {
+                    eTloginpassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+                }
+            }
+        });
+
 
         tVsignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +154,7 @@ public class SignIn extends AppCompatActivity {
             eTloginpassword.setError("Mot de passe trop court");
             return false;
 
-        } else {
-            return true;
+        } else {            return true;
         }
     }
-        }
+}
