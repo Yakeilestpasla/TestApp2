@@ -91,7 +91,9 @@ public class SignIn extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 changeInProgress(false);
                 if (task.isSuccessful()) {
-                    if (firebaseAuth.getCurrentUser().isEmailVerified()) {}
+                    if (firebaseAuth.getCurrentUser().isEmailVerified()) {
+                        startActivity(new Intent(SignIn.this, Profile.class));
+                    }
                     else {
                         Utility.showToast(SignIn.this, "Email not verified");
                     }
