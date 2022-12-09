@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Createprofile"
+    android:gravity="center"
+    android:background="@drawable/background">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:shadowColor="@color/black"
+        android:shadowDx="-3"
+        android:shadowDy="3"
+        android:shadowRadius="5"
+        android:text="Create Profile"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollview"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cpp"
+                android:layout_width="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="100dp"
+                android:layout_marginStart="50dp"
+                app:cardCornerRadius="100dp">
+
+                <ImageView
+                    android:id="@+id/createppincv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_editpp" />
+
+
+            </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+            <EditText
+                android:id="@+id/createusername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawableLeft="@drawable/ic_baseline_person_24"
+                android:drawablePadding="7dp"
+                android:hint="Username"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:id="@+id/cmetier1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawableLeft="@drawable/ic_baseline_factory_24"
+                android:drawablePadding="7dp"
+                android:hint="Competence"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:id="@+id/cmetier2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawableLeft="@drawable/ic_baseline_factory_24"
+                android:drawablePadding="7dp"
+                android:hint="Competence"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:id="@+id/cbio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:drawableLeft="@drawable/ic_baseline_info_24"
+                android:drawablePadding="7dp"
+                android:hint="Bio rapide"
+                android:inputType="textMultiLine"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:id="@+id/createmail"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:textColorHint="@color/white"
+                android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Social"
+                android:id="@+id/csocial1"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_24"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Social"
+                android:id="@+id/csocial2"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_24"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Social"
+                android:id="@+id/csocial3"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_24"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Social"
+                android:id="@+id/csocial4"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_24"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Social"
+                android:id="@+id/csocial5"
+                android:layout_margin="4dp"
+                android:drawablePadding="7dp"
+                android:drawableLeft="@drawable/ic_baseline_filter_24"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"/>
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btncreateprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/design_default_color_on_secondary"
+        android:text="Create Profile" />
+
+
+
+</LinearLayout>

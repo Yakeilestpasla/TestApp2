@@ -48,7 +48,7 @@
                 app:cardCornerRadius="100dp">
 
                 <ImageView
-                    android:id="@+id/ppincv"
+                    android:id="@+id/updateppincv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -63,7 +63,7 @@
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/updateusername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -115,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:id="@+id/email"
+        android:id="@+id/updatemail"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:textColorHint="@color/white"

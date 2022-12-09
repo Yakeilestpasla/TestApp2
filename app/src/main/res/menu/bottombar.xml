@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="profile"
+        android:icon="@drawable/ic_baseline_cabin_24"
+        android:id="@+id/bottombarmenu"
+        app:showAsAction="always"/>
+
+    <item android:title="avoir1"
+        android:icon="@drawable/ic_baseline_build_24"
+        android:id="@+id/avoir1"
+        app:showAsAction="always"/>
+
+    <item android:title="avoir2"
+        android:icon="@drawable/ic_baseline_build_24"
+        android:id="@+id/avoir2"
+        app:showAsAction="always"/>
+
+    <item android:title="avoir3"
+        android:icon="@drawable/ic_baseline_build_24"
+        android:id="@+id/avoir3"
+        app:showAsAction="always"/>
+
+</menu>
