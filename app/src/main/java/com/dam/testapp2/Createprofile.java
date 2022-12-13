@@ -68,7 +68,7 @@ public class Createprofile extends AppCompatActivity {
         eTusername = findViewById(R.id.createusername);
         eTmail = findViewById(R.id.createmail);
         eTmetier1 = findViewById(R.id.cmetier1);
-        eTmetier2 = findViewById(R.id.createmail);
+        eTmetier2 = findViewById(R.id.cmetier2);
         eTbio = findViewById(R.id.cbio);
         eTsocial1 = findViewById(R.id.csocial1);
         eTsocial2 = findViewById(R.id.csocial2);
@@ -112,7 +112,7 @@ public class Createprofile extends AppCompatActivity {
 
         try {
             if (requestCode == PICK_IMAGE || resultCode == RESULT_OK || data != null || data.getData() != null){
-                Uri imageUri = data.getData();
+                imageUri = data.getData();
 
                 Glide.with(this).load(imageUri).into(createPpincv);
             }
@@ -194,7 +194,7 @@ public class Createprofile extends AppCompatActivity {
                                         Utility.showToast(getApplicationContext(), "profile created");
                                         progressBar.setVisibility(View.INVISIBLE);
 
-                                        Intent intent = new Intent(Createprofile.this, MainActivity.class);
+                                        Intent intent = new Intent(Createprofile.this, Profile.class);
                                         startActivity(intent);
                                     }
                                 })
