@@ -190,6 +190,14 @@
 
     </ScrollView>
 
+    <ProgressBar
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        android:indeterminateTint="@color/white"
+        android:id="@+id/createprogress"
+        android:visibility="gone" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btncreateprofile"
         android:layout_width="wrap_content"

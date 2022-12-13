@@ -8,6 +8,11 @@ public class Allusers {
     String metier2;
     String mail;
     String social1;
+    String social2;
+    String social3;
+    String social4;
+    String social5;
+    String uid;
 
     public Allusers(){}
 
@@ -100,9 +105,5 @@ public class Allusers {
         this.uid = uid;
     }
 
-    String social2;
-    String social3;
-    String social4;
-    String social5;
-    String uid;
+
 }

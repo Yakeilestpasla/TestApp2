@@ -3,6 +3,7 @@ package com.dam.testapp2;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -65,7 +66,7 @@ public class Editprofpicture extends AppCompatActivity {
         btnCancelpp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Editprofpicture.this, Profile.class));
+                startActivity(new Intent(Editprofpicture.this, MainActivity.class));
             }
         });
 
@@ -79,7 +80,7 @@ public class Editprofpicture extends AppCompatActivity {
         btnPublierpp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ;
+                startActivity((new Intent(Editprofpicture.this, MainActivity.class)));
             }
         });
 

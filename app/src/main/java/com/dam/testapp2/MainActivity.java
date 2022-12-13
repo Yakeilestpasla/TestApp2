@@ -4,17 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -37,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottombar);
         bottomNavigationView.setOnNavigationItemSelectedListener(onNav);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new Fragment1()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new FragmentProfil()).commit();
 
 
 
@@ -64,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             Fragment selected = null;
             switch (item.getItemId()){
                 case R.id.bottombarmenu:
-                    selected = new Fragment1();
+                    selected = new FragmentProfil();
                     break;
 
                 case R.id.avoir1:

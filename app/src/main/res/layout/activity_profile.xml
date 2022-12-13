@@ -19,7 +19,7 @@
         android:id="@+id/bp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:src="@drawable/foret"
+        android:src="@drawable/ic_baseline_add_photo_alternate_24"
         android:cropToPadding="true"
         android:padding="10dp"/>
 
@@ -36,7 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/zita" />
+            android:background="@drawable/background"
+            android:src="@drawable/ic_baseline_add_a_photo_24" />
 
 
     </androidx.cardview.widget.CardView>
@@ -53,7 +54,7 @@
         android:shadowDx="-3"
         android:shadowDy="3"
         android:shadowRadius="5"
-        android:text="Samuelle Vialle"
+        android:text="Prenom Nom"
         android:textColor="#FFFFFFFF"
         android:textColorHighlight="#000000"
         android:textSize="36sp"
@@ -68,7 +69,7 @@
         android:layout_alignParentBottom="false"
         android:layout_marginTop="4dp"
         android:gravity="right"
-        android:text="Devellopeur"
+        android:text="Metier2"
         android:layout_marginEnd="20dp"
         android:textColor="@color/white" />
 
@@ -81,7 +82,7 @@
         android:layout_alignParentBottom="false"
         android:layout_marginTop="4dp"
         android:gravity="right"
-        android:text="Professeur"
+        android:text="Metier1"
         android:layout_marginEnd="120dp"
         android:textColor="@color/white" />
 
@@ -98,10 +99,132 @@
         android:id="@+id/editbp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/bp"
+        android:layout_alignTop="@+id/bp"
+        android:padding="10dp"
+        android:src="@drawable/ic_baseline_add_24" />
+
+    <ImageView
+        android:id="@+id/updateprofile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/bp"
         android:layout_alignBottom="@+id/bp"
         android:padding="10dp"
         android:src="@drawable/ic_baseline_add_24" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/metier1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:id="@+id/linearmetier">
+
+
+                    <TextView
+                        android:id="@+id/pmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="Email"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/social1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="social1"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/social2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="social2"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/social3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="social3"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/social4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:text="social4"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/social6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="50dp"
+                        android:text="social5"
+                        android:textColor="@color/white" />
+
+
+
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Biographie "
+                    android:layout_marginTop="8dp"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/actualite"
+                    android:layout_width="match_parent"
+                    android:layout_height="342dp"
+                    android:outlineAmbientShadowColor="@color/white" />
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </ScrollView>
+
+
+
+
 
 
 </RelativeLayout>

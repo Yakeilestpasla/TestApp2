@@ -1,26 +1,20 @@
 package com.dam.testapp2;
 
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,9 +28,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class Profile extends AppCompatActivity {
+import org.w3c.dom.CDATASection;
 
-
+public class FragmentProfil extends Fragment implements View.OnClickListener {
     ImageView iVlogoutprofile, iVprofilepicture, iVbackgroundpicture, iVchangeprofilepicture, iVchangebackgroundpicture, iVupdateprofile;
     TextView tVprofileusername, tVmail, tVmetier1, tVmetier2, tVsocial1, tVsocial2, tVsocial3, tVsocial4, tVsocial5;
     EditText eTbio;
@@ -54,31 +48,34 @@ public class Profile extends AppCompatActivity {
     FirebaseUser user;
 
 
-
-
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_profile, container, false);
+        return view;
+    }
 
     @Override
-    protected void onCreate(Bundle saveInstanceState) {
-        super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_profile);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
 
-        iVlogoutprofile = findViewById(R.id.logoutprofile);
-        iVchangeprofilepicture = findViewById(R.id.editppp);
-        iVchangebackgroundpicture = findViewById(R.id.editbp);
-        iVupdateprofile = findViewById(R.id.updateprofile);
-        tVsocial1 = findViewById(R.id.social1);
-        tVsocial2 = findViewById(R.id.social2);
-        tVsocial3 = findViewById(R.id.social3);
-        tVsocial4 = findViewById(R.id.social4);
-        tVsocial5 = findViewById(R.id.social5);
-        tVprofileusername = findViewById(R.id.username);
-        tVmetier1 = findViewById(R.id.metier1);
-        tVmetier2 = findViewById(R.id.metier2);
-        tVmail = findViewById(R.id.pmail);
-        iVbackgroundpicture = findViewById(R.id.bp);
-        iVprofilepicture = findViewById(R.id.ppincv);
-        eTbio = findViewById(R.id.bio);
+        iVlogoutprofile = view.findViewById(R.id.logoutprofile);
+        iVchangeprofilepicture = view.findViewById(R.id.editppp);
+        iVchangebackgroundpicture = view.findViewById(R.id.editbp);
+        iVupdateprofile = view.findViewById(R.id.updateprofile);
+        tVsocial1 = view.findViewById(R.id.social1);
+        tVsocial2 = view.findViewById(R.id.social2);
+        tVsocial3 = view.findViewById(R.id.social3);
+        tVsocial4 = view.findViewById(R.id.social4);
+        tVsocial5 = view.findViewById(R.id.social5);
+        tVprofileusername = view.findViewById(R.id.username);
+        tVmetier1 = view.findViewById(R.id.metier1);
+        tVmetier2 = view.findViewById(R.id.metier2);
+        tVmail = view.findViewById(R.id.pmail);
+        iVbackgroundpicture = view.findViewById(R.id.bp);
+        iVprofilepicture = view.findViewById(R.id.ppincv);
+        eTbio = view.findViewById(R.id.bio);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -100,11 +97,11 @@ public class Profile extends AppCompatActivity {
                     tVmail.setText(email);
                     tVsocial1.setText(social1);
                     try {
-                        Glide.with(getApplicationContext()).load(image).into(iVprofilepicture);
+                        Glide.with(getContext()).load(image).into(iVprofilepicture);
 
                     } catch (Exception e) {
 
-                        Glide.with(getApplicationContext()).load(R.drawable.ic_baseline_add_a_photo_24).into(iVprofilepicture);
+                        Glide.with(getActivity()).load(R.drawable.ic_baseline_add_a_photo_24).into(iVprofilepicture);
                     }
 
 
@@ -122,14 +119,14 @@ public class Profile extends AppCompatActivity {
         iVchangebackgroundpicture.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Updateprofile.class));
+                startActivity(new Intent(getActivity(), Updateprofile.class));
             }
         }));
 
         iVupdateprofile.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Createprofile.class));
+                startActivity(new Intent(getActivity(), Createprofile.class));
 
             }
         }));
@@ -137,20 +134,24 @@ public class Profile extends AppCompatActivity {
         iVchangeprofilepicture.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Editprofpicture.class));
+                startActivity(new Intent(getActivity(), Editprofpicture.class));
             }
         }));
 
         iVlogoutprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utility.showToast(Profile.this, "Logout");
+                Utility.showToast(getContext(), "Logout");
                 firebaseAuth.getCurrentUser();
                 firebaseAuth.signOut();
-                startActivity(new Intent(Profile.this, SignIn.class));
+                startActivity(new Intent(getActivity(), SignIn.class));
             }
         });
 
+    }
+
+    @Override
+    public void onClick(View view) {
 
     }
 

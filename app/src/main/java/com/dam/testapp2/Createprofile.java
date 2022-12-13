@@ -15,10 +15,12 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,13 +47,15 @@ public class Createprofile extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     StorageReference storageReference;
+    FirebaseStorage firebaseStorage;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     Allusers member;
     String currentUserId;
+    ProgressBar progressBar;
 
 
 
-    private static final int PICK_IMAGE =1;
+   private static final int PICK_IMAGE =1;
 
 
 
@@ -71,6 +75,7 @@ public class Createprofile extends AppCompatActivity {
         eTsocial3 = findViewById(R.id.csocial3);
         eTsocial4 = findViewById(R.id.csocial4);
         eTsocial5 = findViewById(R.id.csocial5);
+        progressBar = findViewById(R.id.createprogress);
         btnCreateprofile = findViewById(R.id.btncreateprofile);
         createPpincv = findViewById(R.id.createppincv);
         member = new Allusers();
@@ -78,8 +83,8 @@ public class Createprofile extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = user.getUid();
 
-        documentReference = db.collection("user").document(currentUserId);
-        storageReference = FirebaseStorage.getInstance().getReference("Profile image");
+        documentReference = db.collection("user").document("profile");
+        storageReference = firebaseStorage.getInstance().getReference("Profile image");
         databaseReference = firebaseDatabase.getReference("All Users");
 
         btnCreateprofile.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +100,7 @@ public class Createprofile extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivity(intent);
+                startActivityForResult(intent, PICK_IMAGE);
             }
         }));
 
@@ -107,7 +112,7 @@ public class Createprofile extends AppCompatActivity {
 
         try {
             if (requestCode == PICK_IMAGE || resultCode == RESULT_OK || data != null || data.getData() != null){
-                imageUri = data.getData();
+                Uri imageUri = data.getData();
 
                 Glide.with(this).load(imageUri).into(createPpincv);
             }
@@ -118,11 +123,8 @@ public class Createprofile extends AppCompatActivity {
 
 
     }
-    private  String getFileExt(Uri uri){
-        ContentResolver contentResolver = getContentResolver();
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType((contentResolver.getType(uri)));
-    }
+
+
 
     private void uploadData() {
         String username = eTusername.getText().toString();
@@ -139,7 +141,7 @@ public class Createprofile extends AppCompatActivity {
         if (!TextUtils.isEmpty(username)  ||  !TextUtils.isEmpty(metier1)  ||  !TextUtils.isEmpty(metier2)  ||!TextUtils.isEmpty(mail)  ||
         !TextUtils.isEmpty(bio)  ||  !TextUtils.isEmpty(social1)  ||  !TextUtils.isEmpty(social2) ||  !TextUtils.isEmpty(social3)  ||
         !TextUtils.isEmpty(social4)  ||  !TextUtils.isEmpty(social5)  || imageUri != null){
-            final  StorageReference reference = storageReference.child(System.currentTimeMillis()+ "."+getFileExt(imageUri));
+            final  StorageReference reference = storageReference.child(System.currentTimeMillis() + ".");
             uploadTask = reference.putFile(imageUri);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -168,7 +170,8 @@ public class Createprofile extends AppCompatActivity {
                         profile.put("social3", social3);
                         profile.put("social4", social4);
                         profile.put("social5", social5);
-                        profile.put("privacy", "public");
+                        profile.put("uid", currentUserId);
+
 
                         member.setName(username);
                         member.setMetier1(metier1);
@@ -187,30 +190,36 @@ public class Createprofile extends AppCompatActivity {
                         documentReference.set(profile)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(Void unused) {
+                                    public void onSuccess(Void aVoid) {
                                         Utility.showToast(getApplicationContext(), "profile created");
+                                        progressBar.setVisibility(View.INVISIBLE);
 
-
-                                        Handler handler = new Handler();
-                                        handler.postDelayed(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Intent intent = new Intent(Createprofile.this, Fragment1.class);
-                                                startActivity(intent);
-                                            }
-                                        }, 2000);
+                                        Intent intent = new Intent(Createprofile.this, MainActivity.class);
+                                        startActivity(intent);
                                     }
-
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Utility.showToast(Createprofile.this, "failed");
+                                    }
                                 });
+                    }
+                }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
 
 
                     }else {
                         Utility.showToast(getApplicationContext(),"Please fill all Fields");
                     }
 
-                }
-            });
+
 
         }
     }
-}
