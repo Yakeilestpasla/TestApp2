@@ -19,7 +19,7 @@
         app:cardCornerRadius="100dp">
 
         <ImageView
-            android:id="@+id/ppincv"
+            android:id="@+id/editppincv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"

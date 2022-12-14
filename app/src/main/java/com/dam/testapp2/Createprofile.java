@@ -49,6 +49,7 @@ public class Createprofile extends AppCompatActivity {
     StorageReference storageReference;
     FirebaseStorage firebaseStorage;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    FirebaseAuth  authProfile;
     Allusers member;
     String currentUserId;
     ProgressBar progressBar;
@@ -84,7 +85,7 @@ public class Createprofile extends AppCompatActivity {
         currentUserId = user.getUid();
 
         documentReference = db.collection("user").document("profile");
-        storageReference = firebaseStorage.getInstance().getReference("Profile image");
+        storageReference = firebaseStorage.getInstance().getReference("profile image");
         databaseReference = firebaseDatabase.getReference("All Users");
 
         btnCreateprofile.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +126,13 @@ public class Createprofile extends AppCompatActivity {
     }
 
 
+    private String getFileExt (Uri uri){
+        ContentResolver contentResolver =  getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    }
+
+
 
     private void uploadData() {
         String username = eTusername.getText().toString();
@@ -141,7 +149,7 @@ public class Createprofile extends AppCompatActivity {
         if (!TextUtils.isEmpty(username)  ||  !TextUtils.isEmpty(metier1)  ||  !TextUtils.isEmpty(metier2)  ||!TextUtils.isEmpty(mail)  ||
         !TextUtils.isEmpty(bio)  ||  !TextUtils.isEmpty(social1)  ||  !TextUtils.isEmpty(social2) ||  !TextUtils.isEmpty(social3)  ||
         !TextUtils.isEmpty(social4)  ||  !TextUtils.isEmpty(social5)  || imageUri != null){
-            final  StorageReference reference = storageReference.child(System.currentTimeMillis() + ".");
+            final  StorageReference reference = storageReference.child(System.currentTimeMillis() + "profile.jpg" + getFileExt(imageUri));
             uploadTask = reference.putFile(imageUri);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -170,6 +178,7 @@ public class Createprofile extends AppCompatActivity {
                         profile.put("social3", social3);
                         profile.put("social4", social4);
                         profile.put("social5", social5);
+                        profile.put("profile image",downloadUri.toString());
                         profile.put("uid", currentUserId);
 
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -93,6 +94,7 @@ public class Profile extends AppCompatActivity {
         user = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getInstance().getReference("user");
+        storageReference = firebaseStorage.getInstance().getReference("Profile image");
 
 
 
@@ -184,10 +186,13 @@ public class Profile extends AppCompatActivity {
         super.onStart();
 
 
+
+
         documentReference.get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
 
                         if (task.getResult().exists()){
                             String username_result = task.getResult().getString("username");
@@ -200,9 +205,9 @@ public class Profile extends AppCompatActivity {
                             String social3_result = task.getResult().getString("social3");
                             String social4_result = task.getResult().getString("social4");
                             String social5_result = task.getResult().getString("social5");
-                            String Url = task.getResult().getString("url");
+                            String image_result = task.getResult().getString("profile image");
 
-                            Glide.with(getApplicationContext()).load(Url).into(iVprofilepicture);
+                            Glide.with(getApplicationContext()).load(image_result).into(iVprofilepicture);
 
                             tVprofileusername.setText(username_result);
                             tVmail.setText(mail_result);

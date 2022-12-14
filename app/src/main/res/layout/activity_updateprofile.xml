@@ -75,7 +75,7 @@
         android:textColorHint="@color/white" />
 
     <EditText
-        android:id="@+id/metier1"
+        android:id="@+id/umetier1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -87,7 +87,7 @@
         android:textColorHint="@color/white" />
 
             <EditText
-                android:id="@+id/metier2"
+                android:id="@+id/umetier2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -99,7 +99,7 @@
                 android:textColorHint="@color/white" />
 
             <EditText
-        android:id="@+id/bio"
+        android:id="@+id/ubio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -127,7 +127,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Social"
-        android:id="@+id/social1"
+        android:id="@+id/usocial1"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:drawableLeft="@drawable/ic_baseline_filter_24"
@@ -139,7 +139,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Social"
-        android:id="@+id/social2"
+        android:id="@+id/usocial2"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:drawableLeft="@drawable/ic_baseline_filter_24"
@@ -151,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Social"
-        android:id="@+id/social3"
+        android:id="@+id/usocial3"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:drawableLeft="@drawable/ic_baseline_filter_24"
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Social"
-        android:id="@+id/social4"
+        android:id="@+id/usocial4"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:drawableLeft="@drawable/ic_baseline_filter_24"
@@ -175,7 +175,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Social"
-        android:id="@+id/social5"
+        android:id="@+id/usocial5"
         android:layout_margin="4dp"
         android:drawablePadding="7dp"
         android:drawableLeft="@drawable/ic_baseline_filter_24"
