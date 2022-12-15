@@ -39,7 +39,7 @@ import java.util.Map;
 public class Createprofile extends AppCompatActivity {
 
     EditText eTusername, eTmetier1, eTmetier2, eTbio, eTmail, eTsocial1, eTsocial2, eTsocial3, eTsocial4, eTsocial5;
-    Button btnCreateprofile;
+    Button btnCreateprofile, btncancelprofile;
     ImageView createPpincv;
     Uri imageUri;
     UploadTask uploadTask;
@@ -78,6 +78,7 @@ public class Createprofile extends AppCompatActivity {
         eTsocial5 = findViewById(R.id.csocial5);
         progressBar = findViewById(R.id.createprogress);
         btnCreateprofile = findViewById(R.id.btncreateprofile);
+        btncancelprofile = findViewById(R.id.btncancelcreate);
         createPpincv = findViewById(R.id.createppincv);
         member = new Allusers();
 
@@ -87,6 +88,13 @@ public class Createprofile extends AppCompatActivity {
         documentReference = db.collection("user").document("profile");
         storageReference = firebaseStorage.getInstance().getReference("profile image");
         databaseReference = firebaseDatabase.getReference("All Users");
+
+        btncancelprofile.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Createprofile.this, Profile.class));
+            }
+        }));
 
         btnCreateprofile.setOnClickListener(new View.OnClickListener() {
             @Override

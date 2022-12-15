@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -60,6 +61,7 @@ public class Updateprofile extends AppCompatActivity {
     private static final int PICK_IMAGE =1;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +79,7 @@ public class Updateprofile extends AppCompatActivity {
         eTsocial4 = findViewById(R.id.usocial4);
         eTsocial5 = findViewById(R.id.usocial5);
         btnUpdateprofile = findViewById(R.id.btnsaveprofile);
+
         updatePpincv = findViewById(R.id.updateppincv);
         member = new Allusers();
 
@@ -86,6 +89,8 @@ public class Updateprofile extends AppCompatActivity {
         documentReference = db.collection("user").document("profile");
         storageReference = firebaseStorage.getInstance().getReference("profile image");
         databaseReference = firebaseDatabase.getReference("All Users");
+
+
 
 
         btnUpdateprofile.setOnClickListener(new View.OnClickListener() {
@@ -317,7 +322,47 @@ public class Updateprofile extends AppCompatActivity {
 
 
         }else {
-            Utility.showToast(getApplicationContext(),"Please fill all Fields");
+            final DocumentReference sDoc = db.collection("user").document("profile");
+            db.runTransaction(new Transaction.Function<Void>() {
+                        @Override
+                        public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                            DocumentSnapshot snapshot = transaction.get(sDoc);
+
+
+
+                            transaction.update(sDoc, "username", username);
+                            transaction.update(sDoc,"metier1", metier1);
+                            transaction.update(sDoc,"metier2", metier2);
+                            transaction.update(sDoc,"mail", mail);
+                            transaction.update(sDoc,"bio", bio);
+                            transaction.update(sDoc,"social1",social1);
+                            transaction.update(sDoc,"social2",social2);
+                            transaction.update(sDoc,"social3",social3);
+                            transaction.update(sDoc,"social4",social4);
+                            transaction.update(sDoc,"social5",social5);
+                           // transaction.update(sDoc, "profile image",downloadUri.toString());
+                            transaction.update(sDoc,"uid",currentUserId);
+
+
+                            return null;
+                        }
+                    })
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Utility.showToast(Updateprofile.this,"updated");
+                            Intent intent = new Intent(Updateprofile.this, Profile.class);
+                            startActivity(intent);
+
+                        }
+
+                    })
+                    .addOnFailureListener(new OnFailureListener(){
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Utility.showToast(Updateprofile.this,"failed");
+                        }
+                    });
         }
 
 

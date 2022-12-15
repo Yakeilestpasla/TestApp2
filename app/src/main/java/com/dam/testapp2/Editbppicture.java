@@ -41,12 +41,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Editprofpicture extends AppCompatActivity {
+public class Editbppicture extends AppCompatActivity {
 
 
 
-    ImageView iVeditpp;
-    Button btnCancelpp, btnPublierpp;
+    ImageView iVeditbp;
+    Button btnCancelbp, btnPublierbp;
     UploadTask uploadTask;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
@@ -67,14 +67,14 @@ public class Editprofpicture extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editprofpicture);
+        setContentView(R.layout.activity_editbppicture);
 
 
         documentReference = db.collection("user").document("profile");
 
-        iVeditpp = findViewById(R.id.editppincv);
-        btnCancelpp = findViewById(R.id.btncanceleditpp);
-        btnPublierpp = findViewById(R.id.btneditpp);
+        iVeditbp = findViewById(R.id.updatebp);
+        btnCancelbp = findViewById(R.id.btncanceleditbp);
+        btnPublierbp = findViewById(R.id.btneditbp);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         currentUserId = user.getUid();
@@ -91,22 +91,22 @@ public class Editprofpicture extends AppCompatActivity {
 
 
         databaseReference = firebaseDatabase.getInstance().getReference("user");
-        storageReference = firebaseStorage.getInstance().getReference("profile image");
+        storageReference = firebaseStorage.getInstance().getReference("background picture");
 
 
-        btnCancelpp.setOnClickListener(new View.OnClickListener() {
+        btnCancelbp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Editprofpicture.this, Profile.class));
+                startActivity(new Intent(Editbppicture.this, Profile.class));
             }
         });
 
-        iVeditpp.setOnClickListener(new View.OnClickListener() {
+        iVeditbp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { choosePicture();}
         });
 
-        btnPublierpp.setOnClickListener(new View.OnClickListener() {
+        btnPublierbp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadData();
@@ -133,7 +133,7 @@ public class Editprofpicture extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
-            Glide.with(this).load(imageUri).into(iVeditpp);
+            Glide.with(this).load(imageUri).into(iVeditbp);
             //iVeditpp.setImageURI(imagepp);
             uploadPicture();
         }
@@ -157,7 +157,7 @@ public class Editprofpicture extends AppCompatActivity {
 
 
                         }else{
-                            Utility.showToast(Editprofpicture.this, "No profile");
+                            Utility.showToast(Editbppicture.this, "No profile");
                         }
 
 
@@ -193,7 +193,7 @@ public class Editprofpicture extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "image uploaded", Snackbar.LENGTH_LONG).show();
-                        Glide.with(getApplicationContext()).load(imageUri).into(iVeditpp);
+                        Glide.with(getApplicationContext()).load(imageUri).into(iVeditbp);
 
                     }
                 })
@@ -223,7 +223,7 @@ public class Editprofpicture extends AppCompatActivity {
 
 
         if (imageUri != null){
-            final  StorageReference reference = storageReference.child(System.currentTimeMillis() + "profile.jpg" + getFileExt(imageUri));
+            final  StorageReference reference = storageReference.child(System.currentTimeMillis() + "background.jpg" + getFileExt(imageUri));
             uploadTask = reference.putFile(imageUri);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -249,7 +249,7 @@ public class Editprofpicture extends AppCompatActivity {
 
 
 
-                                                transaction.update(sDoc, "profile image",downloadUri.toString());
+                                                transaction.update(sDoc, "background picture",downloadUri.toString());
                                                 transaction.update(sDoc,"uid",currentUserId);
 
 
@@ -259,8 +259,8 @@ public class Editprofpicture extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Utility.showToast(Editprofpicture.this,"updated");
-                                                Intent intent = new Intent(Editprofpicture.this, Profile.class);
+                                                Utility.showToast(Editbppicture.this,"updated");
+                                                Intent intent = new Intent(Editbppicture.this, Profile.class);
                                                 startActivity(intent);
 
                                             }
@@ -269,7 +269,7 @@ public class Editprofpicture extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener(){
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Utility.showToast(Editprofpicture.this,"failed");
+                                                Utility.showToast(Editbppicture.this,"failed");
                                             }
                                         });
 
@@ -305,8 +305,8 @@ public class Editprofpicture extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Utility.showToast(Editprofpicture.this,"updated");
-                            Intent intent = new Intent(Editprofpicture.this, Profile.class);
+                            Utility.showToast(Editbppicture.this,"updated");
+                            Intent intent = new Intent(Editbppicture.this, Profile.class);
                             startActivity(intent);
 
                         }
@@ -315,7 +315,7 @@ public class Editprofpicture extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener(){
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Utility.showToast(Editprofpicture.this,"failed");
+                            Utility.showToast(Editbppicture.this,"failed");
                         }
                     });
         }

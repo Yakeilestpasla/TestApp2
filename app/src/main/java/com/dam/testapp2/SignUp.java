@@ -16,6 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 public class SignUp extends AppCompatActivity {
 
@@ -25,6 +31,7 @@ public class SignUp extends AppCompatActivity {
     TextView tVbtnlogin;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class SignUp extends AppCompatActivity {
         btnCreateaccount = findViewById(R.id.signupbtn);
         tVbtnlogin = findViewById(R.id.tvloginbtn);
         progressBar = findViewById(R.id.progress_bar);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
 
         tVbtnlogin.setOnClickListener(new View.OnClickListener() {
@@ -65,14 +74,13 @@ public class SignUp extends AppCompatActivity {
         String password = eTpassword.getText().toString();
         String repassword = eTrepassword.getText().toString();
 
+
         boolean isValidated = validateData(email, password, repassword);
         if (!isValidated) {
 
 
-
             return;
-        }
-        else {
+        } else {
 
             createAccountInFirebase(email, password);
 
@@ -83,6 +91,11 @@ public class SignUp extends AppCompatActivity {
 
     void createAccountInFirebase(String email, String password) {
         changeInprogress(true);
+
+//      UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+//              .build();
+//
+//      firebaseUser.updateProfile(request);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {

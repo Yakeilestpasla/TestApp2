@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -42,7 +43,7 @@ import com.google.firebase.storage.UploadTask;
 public class Profile extends AppCompatActivity {
 
 
-    ImageView iVlogoutprofile, iVprofilepicture, iVbackgroundpicture, iVchangeprofilepicture, iVchangebackgroundpicture, iVupdateprofile;
+    ImageView iVlogoutprofile, iVprofilepicture, iVbackgroundpicture, iVchangeprofilepicture, iVchangebackgroundpicture, iVupdateprofile ;
     TextView tVprofileusername, tVmail,tVbio, tVmetier1, tVmetier2, tVsocial1, tVsocial2, tVsocial3, tVsocial4, tVsocial5;
 
 
@@ -63,13 +64,14 @@ public class Profile extends AppCompatActivity {
 
 
 
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_profile);
 
-        documentReference = db.collection("user").document("profile");
 
 
         iVlogoutprofile = findViewById(R.id.logoutprofile);
@@ -93,8 +95,14 @@ public class Profile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        currentUserId = user.getUid();
+
+
+
         databaseReference = firebaseDatabase.getInstance().getReference("user");
         storageReference = firebaseStorage.getInstance().getReference("Profile image");
+        documentReference = db.collection("user").document("profile");
+
 
 
 
@@ -134,14 +142,14 @@ public class Profile extends AppCompatActivity {
         iVchangebackgroundpicture.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Updateprofile.class));
+                startActivity(new Intent(Profile.this, Editbppicture.class));
             }
         }));
 
         iVupdateprofile.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Createprofile.class));
+                startActivity(new Intent(Profile.this, Updateprofile.class));
 
             }
         }));
@@ -166,21 +174,21 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    public void ShowProfile(View view) {
-        documentReference.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.getResult().exists()) {
-                            Intent intent = new Intent(Profile.this, Profile.class);
-                            startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(Profile.this, Createprofile.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
-    }
+//    public void ShowProfile(View view) {
+//        documentReference.get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.getResult().exists()) {
+//                            Intent intent = new Intent(Profile.this, Profile.class);
+//                            startActivity(intent);
+//                        } else {
+//                            Intent intent = new Intent(Profile.this, Createprofile.class);
+//                            startActivity(intent);
+//                        }
+//                    }
+//                });
+//    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -206,8 +214,11 @@ public class Profile extends AppCompatActivity {
                             String social4_result = task.getResult().getString("social4");
                             String social5_result = task.getResult().getString("social5");
                             String image_result = task.getResult().getString("profile image");
+                            String imagebp_result = task.getResult().getString("background picture");
+
 
                             Glide.with(getApplicationContext()).load(image_result).into(iVprofilepicture);
+                            Glide.with(getApplicationContext()).load(imagebp_result).into(iVbackgroundpicture);
 
                             tVprofileusername.setText(username_result);
                             tVmail.setText(mail_result);
@@ -220,8 +231,14 @@ public class Profile extends AppCompatActivity {
                             tVsocial4.setText(social4_result);
                             tVsocial5.setText(social5_result);
 
+
+                            //databaseReference.child(currentUserId).setValue(member);
+
+
                         }else {
-                            Utility.showToast(Profile.this,"No profile found");                        }
+                            Utility.showToast(Profile.this,"No profile found");
+                            Intent intent = new Intent(Profile.this, Createprofile.class);
+                                                    }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
