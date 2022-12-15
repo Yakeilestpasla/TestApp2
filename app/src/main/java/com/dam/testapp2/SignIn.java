@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -40,6 +42,7 @@ public class SignIn extends AppCompatActivity {
     EditText eTlogin, eTloginpassword;
     Button loginBtn;
     CheckBox cBshowpassword;
+    ImageView iVgreta;
     ProgressBar progressBar;
     TextView tVsignup, tVforgotpassword;
     SignInButton mGoogleLoginbtn;
@@ -69,6 +72,7 @@ public class SignIn extends AppCompatActivity {
         tVforgotpassword = findViewById(R.id.forgotpass);
         loginBtn = findViewById(R.id.loginbtn);
         mGoogleLoginbtn = findViewById(R.id.btngoogle);
+        iVgreta = findViewById(R.id.greta);
 
         FirebaseAuth.getInstance();
 
@@ -77,6 +81,13 @@ public class SignIn extends AppCompatActivity {
             public void onClick(View view) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
+
+        iVgreta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoUrl("https://www.greta-iledefrance.fr/");
             }
         });
 
@@ -119,6 +130,11 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void gotoUrl(String s) {
+        Uri uri = Uri.parse(s);
+        startActivity(new Intent(Intent.ACTION_VIEW, uri));
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
